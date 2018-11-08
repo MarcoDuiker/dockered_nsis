@@ -37,7 +37,7 @@ If a new QGIS version is available in the [ubuntugis](http://qgis.org/ubuntugis)
 Running
 -----------
 
-To run QGIS from a container create a shell script similar to below, perhaps called `docker-qgis`, but you can call it anything you want.
+To run QGIS from a container create a shell script similar to below, perhaps called `docker-qgis`, but you can call it anything you want. Actually, you don't have to create this file as it is included in this repository under the name `docker-qgis`.
 
 
 	#!/bin/sh
@@ -65,17 +65,13 @@ Be sure to make the `docker-qgis` script (or whatever you called your script) an
 
 	chmod a+x docker-qgis
 
-The above is the content of docker-qgis so you can just
-
-	./docker-qgis
-
-Put into a directory listed in your PATH environment variable, eg:
+Copy this file into a directory listed in your PATH environment variable to run it from any place you like, eg:
 
 	sudo cp docker-qgis /usr/local/bin
 
 #### Mounting your home directory ####
 
-The `-v ${HOME}:/home/${USER_NAME}` option in this script will mount your home directory in the container.
+The `-v ${HOME}:/home/${USER_NAME}` option in this script mounts your home directory in the container.
 
 This means that your countainer does NOT run fully isolated.
 

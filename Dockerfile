@@ -30,10 +30,12 @@ RUN    echo $TZ > /etc/timezone                                              \
     && dpkg-reconfigure -f noninteractive tzdata                             \
     && apt-get clean                                                         \
     && apt-get purge                                                         \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*                         \
+    && /usr/bin/dbus-uuidgen >/etc/machine-id
 
 RUN    echo "deb     https://qgis.org/ubuntugis xenial main" >> /etc/apt/sources.list
 RUN    echo "deb-src https://qgis.org/ubuntugis xenial main" >> /etc/apt/sources.list
+RUN    echo "Update the number at the end of this line to install new version and retain cached layers: 2" >> /home/cache_defeat.txt
 
 # Key for qgis ubuntugis
 RUN    apt-key adv --keyserver keyserver.ubuntu.com --recv-key CAEB3DC3BDF7FB45
@@ -53,8 +55,6 @@ RUN    apt-get -y update                                                 \
     && apt-get clean                                                     \
     && apt-get purge                                                     \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN /usr/bin/dbus-uuidgen >/etc/machine-id
 
 # Called when the Docker image is started in the container
 ADD start.sh /start.sh

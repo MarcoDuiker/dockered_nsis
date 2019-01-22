@@ -33,6 +33,14 @@ Adapt this line to your liking before building the container. You can refer to t
 If a new QGIS version is available in the [ubuntugis](http://qgis.org/ubuntugis) packages you can rebuild your container with:
 
 	docker build --no-cache -t qgis3:latest path_to_docker_file_goes_here
+	
+This method is fail-safe, but takes a long time. Adapting the following line in the docker file will install a new version, but re-uses uncanged layers:
+
+	RUN    echo "Update the number at the end of this line to install new version and retain cached layers: 1" >> /home/cache_defeat.txt
+	
+After that, build with:
+
+	docker build -t qgis3:latest path_to_docker_file_goes_here
 
 Running
 -----------
